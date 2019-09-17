@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomepwnerItemCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *thumbNameImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *idLabel;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end
 
