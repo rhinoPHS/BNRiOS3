@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BNRItem : NSObject <NSCoding, NSSecureCoding>
-{
-}
 
-+ (id)randomItem;
++ (instancetype)randomItem;
 
-- (id)initWithItemName:(NSString *)name
+- (instancetype)initWithItemName:(NSString *)name
         valueInDollars:(int)value
           serialNumber:(NSString *)sNumber;
 

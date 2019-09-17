@@ -13,7 +13,7 @@
 @synthesize containedItem;
 @synthesize itemName, serialNumber, dateCreated, valueInDollars, imageKey;
 
-+ (id)randomItem
++ (instancetype)randomItem
 {
     // Create an array of three adjectives
     NSArray *randomAdjectiveList = [NSArray arrayWithObjects:@"Fluffy",
@@ -37,21 +37,22 @@
                             [randomAdjectiveList objectAtIndex:adjectiveIndex],
                             [randomNounList objectAtIndex:nounIndex]];
     int randomValue = rand() % 100;
+    
     NSString *randomSerialNumber = [NSString stringWithFormat:@"%c%c%c%c%c",
                                     '0' + rand() % 10,
                                     'A' + rand() % 26,
                                     '0' + rand() % 10,
                                     'A' + rand() % 26,
                                     '0' + rand() % 10];
+    
     // Once again, ignore the memory problems with this method
-    BNRItem *newItem =
-    [[self alloc] initWithItemName:randomName
-                    valueInDollars:randomValue
-                      serialNumber:randomSerialNumber];
+    BNRItem *newItem = [[self alloc] initWithItemName:randomName
+                                       valueInDollars:randomValue
+                                         serialNumber:randomSerialNumber];
     return newItem;
 }
 
-- (id)initWithItemName:(NSString *)name
+- (instancetype)initWithItemName:(NSString *)name
         valueInDollars:(int)value
           serialNumber:(NSString *)sNumber
 {
@@ -71,11 +72,20 @@
     return self;
 }
 
-- (id)init 
+-(NSString *)randomSerialNumber {
+   return [NSString stringWithFormat:@"%c%c%c%c%c",
+                                    '0' + rand() % 10,
+                                    'A' + rand() % 26,
+                                    '0' + rand() % 10,
+                                    'A' + rand() % 26,
+                                    '0' + rand() % 10];
+}
+
+- (instancetype)init
 {
     return [self initWithItemName:@"Possession"
                    valueInDollars:0
-                     serialNumber:@""];
+                     serialNumber:[self randomSerialNumber]];
 }
 
 

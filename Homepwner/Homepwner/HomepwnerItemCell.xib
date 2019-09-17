@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJE-7H-8Zu">
-                        <rect key="frame" x="53.5" y="23" width="38" height="18"/>
+                        <rect key="frame" x="51.5" y="23" width="38" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                     <constraint firstItem="faF-Rt-x27" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mUp-VQ-YeI"/>
                     <constraint firstItem="BJE-7H-8Zu" firstAttribute="top" secondItem="YcS-sV-f1F" secondAttribute="bottom" id="npK-rK-NPF"/>
                     <constraint firstItem="YcS-sV-f1F" firstAttribute="leading" secondItem="5op-LD-4G0" secondAttribute="trailing" constant="8" symbolic="YES" id="oOX-uC-2XY"/>
-                    <constraint firstItem="BJE-7H-8Zu" firstAttribute="centerX" secondItem="YcS-sV-f1F" secondAttribute="centerX" id="zIF-Ly-UAn"/>
+                    <constraint firstItem="BJE-7H-8Zu" firstAttribute="leading" secondItem="YcS-sV-f1F" secondAttribute="leading" id="wLp-fw-Gn2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

@@ -10,6 +10,7 @@
 #import "Model/BNRItem.h"
 #import "Model/ItemStore.h"
 #import "DetailViewController.h"
+#import "HomepwnerItemCell.h"
 
 @interface ItemsTableViewController ()
 
@@ -57,8 +58,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%lu",(unsigned long)[[ItemStore sharedStore] allItems].count);
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UINib *nib = [UINib nibWithNibName:@"HomepwnerItemCell" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"HomepwnerItemCell"];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
     self.tableView.estimatedRowHeight = 70;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -108,18 +113,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    
+    HomepwnerItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
+    
     BNRItem *p;
     
     if(indexPath.section ==0) {
         p = [[[ItemStore sharedStore] allItems] objectAtIndex:indexPath.row];
+        cell.titleLabel.text = p.itemName;
+        cell.idLabel.text = p.serialNumber;
+        cell.valueLabel.text = [NSString stringWithFormat:@"$%d",p.valueInDollars];
     } else  {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
         cell.textLabel.text = @"No More items";
         return cell;
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:20];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = [p description];
+    
+    
+    
+    
+//    cell.textLabel.font = [UIFont systemFontOfSize:20];
+//    cell.textLabel.numberOfLines = 0;
+//    cell.textLabel.text = [p description];
     
     return cell;
 }
