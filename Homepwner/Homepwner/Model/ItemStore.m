@@ -33,7 +33,8 @@
         NSSet *classes = [NSSet setWithArray:@[
                                            [NSMutableArray class],
                                            [BNRItem class],
-                                           [NSDate class]]];
+                                           [NSDate class],
+                                           [NSData class]]];
         
         NSError *error;
         _allItems = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];

@@ -65,7 +65,7 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
-    self.tableView.estimatedRowHeight = 70;
+    self.tableView.estimatedRowHeight = 40;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
@@ -123,7 +123,8 @@
         cell.titleLabel.text = p.itemName;
         cell.idLabel.text = p.serialNumber;
         cell.valueLabel.text = [NSString stringWithFormat:@"$%d",p.valueInDollars];
-    } else  {
+        cell.thumbNameImageView.image = p.thumbnail;
+     } else  {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
         cell.textLabel.text = @"No More items";
         return cell;

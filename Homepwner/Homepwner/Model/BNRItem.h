@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface BNRItem : NSObject <NSCoding, NSSecureCoding>
 
@@ -25,4 +26,8 @@
 @property (nonatomic, strong) NSDate *dateCreated;
 
 @property (nonatomic, copy) NSString *imageKey;
+
+@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) NSData *thumbnailData;
+-(void)setThumbnailDataFromImage:(UIImage *)image;
 @end

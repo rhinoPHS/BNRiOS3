@@ -11,7 +11,7 @@
 @implementation BNRItem
 @synthesize container;
 @synthesize containedItem;
-@synthesize itemName, serialNumber, dateCreated, valueInDollars, imageKey;
+@synthesize itemName, serialNumber, dateCreated, valueInDollars, imageKey, thumbnailData;
 
 + (instancetype)randomItem
 {
@@ -113,6 +113,7 @@
     [coder encodeObject:dateCreated forKey:@"dateCreated"];
     [coder encodeObject:imageKey forKey:@"imageKey"];
     [coder encodeInt:valueInDollars forKey:@"valueInDollars"];
+    [coder encodeObject:thumbnailData forKey:@"thumbnailData"];
 }
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
@@ -123,12 +124,69 @@
         [self setImageKey:[aDecoder decodeObjectForKey:@"imageKey"]];
         [self setValueInDollars:[aDecoder decodeIntForKey:@"valueInDollars"]];
         dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        thumbnailData = [aDecoder decodeObjectForKey:@"thumbnailData"];
     }
     return self;
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (UIImage *)thumbnail {
+    // If there is no thumbnailData, then I have no then I have no thumbnail to return
+    if(!thumbnailData) {
+        return nil;
+    }
+    
+    if(!_thumbnail) {
+        // Create the image from the data
+        _thumbnail = [UIImage imageWithData:thumbnailData scale:2.0];
+    }
+    
+    return _thumbnail;
+}
+
+- (void)setThumbnailDataFromImage:(UIImage *)image {
+    CGSize origImageSize = [image size];
+    
+    // The rectangle of the thumnail
+    CGRect newRect = CGRectMake(0, 0, 40, 40);
+    
+    // Figure out a scaling ratio to make sure we maintain the same aspect ratio
+    float ratio = MAX(newRect.size.width / origImageSize.width,
+                      newRect.size.height / origImageSize.height);
+    
+    // Create a transparent bitmap context with a scaling factor
+    // equal to that of the screnn
+    
+    UIGraphicsBeginImageContextWithOptions(newRect.size, NO, 0.0);
+    
+    // Create a path that is a rounded recetangle
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:5.0];
+    
+    // Make all subsequent drawing clip to this rounded rectangle
+    [path addClip];
+    
+    // Center the image in the thumbnail rectangle
+    CGRect projectRect;
+    projectRect.size.width = ratio * origImageSize.width;
+    projectRect.size.height = ratio * origImageSize.height;
+    projectRect.origin.x = (newRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (newRect.size.height - projectRect.size.height) / 2.0;
+    
+    [image drawInRect:projectRect];
+    
+    // Get the image from the image context, keep it as our thumbnail
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self setThumbnail:smallImage];
+    
+    // Get the PNG representation of the iamge and set it as our archivale data
+    NSData *data = UIImagePNGRepresentation(smallImage);
+    [self setThumbnailData:data];
+    
+    // Cleanup image context resources, we're done
+    UIGraphicsEndImageContext();
 }
 
 - (void)dealloc
