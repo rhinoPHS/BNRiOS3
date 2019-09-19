@@ -116,6 +116,9 @@
     
     HomepwnerItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
     
+    [cell setController:self];
+    [cell setTableView:tableView];
+    
     BNRItem *p;
     
     if(indexPath.section ==0) {
@@ -160,6 +163,10 @@
 //    if(section ==0) { return [[self headerView] bounds].size.height; }
 //    return 0;
 //}
+
+-(void)showImage:(id)sender atIndexPath:(NSIndexPath *)ip {
+    NSLog(@"Going to show the image for %@",ip);
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete && indexPath.section == 0)

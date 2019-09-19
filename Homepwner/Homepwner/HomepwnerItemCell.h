@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *idLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
+@property (weak, nonatomic) id controller;
+@property (weak, nonatomic) UITableView *tableView;
+- (IBAction)showImage:(id)sender;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

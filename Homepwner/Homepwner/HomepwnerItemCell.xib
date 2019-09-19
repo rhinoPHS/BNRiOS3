@@ -43,18 +43,31 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-Xl-TBN">
+                        <rect key="frame" x="0.0" y="0.0" width="43.5" height="43.5"/>
+                        <state key="normal">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="showImage:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XF4-W2-n7S"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="faF-Rt-x27" secondAttribute="trailing" constant="20" symbolic="YES" id="F4e-md-5IA"/>
+                    <constraint firstItem="X2l-Xl-TBN" firstAttribute="height" secondItem="5op-LD-4G0" secondAttribute="height" id="FZj-9x-cOR"/>
                     <constraint firstAttribute="bottom" secondItem="5op-LD-4G0" secondAttribute="bottom" id="KUM-T9-t2M"/>
                     <constraint firstItem="5op-LD-4G0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Uh4-Ne-7Ef"/>
                     <constraint firstItem="YcS-sV-f1F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="WTF-am-iWv"/>
                     <constraint firstItem="5op-LD-4G0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="X7C-Vc-dc3"/>
+                    <constraint firstItem="X2l-Xl-TBN" firstAttribute="centerY" secondItem="5op-LD-4G0" secondAttribute="centerY" id="dPm-85-VxR"/>
                     <constraint firstItem="5op-LD-4G0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ie8-dv-CXK"/>
                     <constraint firstItem="faF-Rt-x27" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mUp-VQ-YeI"/>
                     <constraint firstItem="BJE-7H-8Zu" firstAttribute="top" secondItem="YcS-sV-f1F" secondAttribute="bottom" id="npK-rK-NPF"/>
                     <constraint firstItem="YcS-sV-f1F" firstAttribute="leading" secondItem="5op-LD-4G0" secondAttribute="trailing" constant="8" symbolic="YES" id="oOX-uC-2XY"/>
+                    <constraint firstItem="X2l-Xl-TBN" firstAttribute="width" secondItem="5op-LD-4G0" secondAttribute="width" id="rsL-LU-q1J"/>
                     <constraint firstItem="BJE-7H-8Zu" firstAttribute="leading" secondItem="YcS-sV-f1F" secondAttribute="leading" id="wLp-fw-Gn2"/>
+                    <constraint firstItem="X2l-Xl-TBN" firstAttribute="centerX" secondItem="5op-LD-4G0" secondAttribute="centerX" id="yJ5-A3-Azq"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
