@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		970BA5B3232F3AE200A07195 /* HomepwnerItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 970BA5B1232F3AE200A07195 /* HomepwnerItemCell.m */; };
 		970BA5B4232F3AE200A07195 /* HomepwnerItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970BA5B2232F3AE200A07195 /* HomepwnerItemCell.xib */; };
+		970BA5B82333BD3200A07195 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970BA5B62333BD3200A07195 /* ImageViewController.m */; };
+		970BA5B92333BD3200A07195 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970BA5B72333BD3200A07195 /* ImageViewController.xib */; };
 		97104C0D231F2A040036BA95 /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 97104C0C231F2A040036BA95 /* BNRImageStore.m */; };
 		975721B8232A440B00FEE0D2 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 975721B6232A440B00FEE0D2 /* CameraOverlayView.m */; };
 		9789AEC3230F61CA004F43F3 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9789AEC2230F61CA004F43F3 /* HeaderView.xib */; };
@@ -29,6 +31,9 @@
 		970BA5B0232F3AE200A07195 /* HomepwnerItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomepwnerItemCell.h; sourceTree = "<group>"; };
 		970BA5B1232F3AE200A07195 /* HomepwnerItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerItemCell.m; sourceTree = "<group>"; };
 		970BA5B2232F3AE200A07195 /* HomepwnerItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomepwnerItemCell.xib; sourceTree = "<group>"; };
+		970BA5B52333BD3200A07195 /* ImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		970BA5B62333BD3200A07195 /* ImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		970BA5B72333BD3200A07195 /* ImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
 		97104C0B231F2A040036BA95 /* BNRImageStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		97104C0C231F2A040036BA95 /* BNRImageStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 		975721B6232A440B00FEE0D2 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
@@ -106,6 +111,9 @@
 				970BA5B0232F3AE200A07195 /* HomepwnerItemCell.h */,
 				970BA5B1232F3AE200A07195 /* HomepwnerItemCell.m */,
 				970BA5B2232F3AE200A07195 /* HomepwnerItemCell.xib */,
+				970BA5B52333BD3200A07195 /* ImageViewController.h */,
+				970BA5B62333BD3200A07195 /* ImageViewController.m */,
+				970BA5B72333BD3200A07195 /* ImageViewController.xib */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 				9789AECD231609EE004F43F3 /* DatePickerViewController.xib in Resources */,
 				978C0F832304057100FFF631 /* LaunchScreen.storyboard in Resources */,
 				978C0F802304057100FFF631 /* Assets.xcassets in Resources */,
+				970BA5B92333BD3200A07195 /* ImageViewController.xib in Resources */,
 				970BA5B4232F3AE200A07195 /* HomepwnerItemCell.xib in Resources */,
 				9789AEC823135B56004F43F3 /* DetailViewController.xib in Resources */,
 			);
@@ -200,6 +209,7 @@
 				975721B8232A440B00FEE0D2 /* CameraOverlayView.m in Sources */,
 				9789AECC231609EE004F43F3 /* DatePickerViewController.m in Sources */,
 				978C0F92230409EE00FFF631 /* BNRItem.m in Sources */,
+				970BA5B82333BD3200A07195 /* ImageViewController.m in Sources */,
 				978C0F862304057100FFF631 /* main.m in Sources */,
 				97104C0D231F2A040036BA95 /* BNRImageStore.m in Sources */,
 				970BA5B3232F3AE200A07195 /* HomepwnerItemCell.m in Sources */,

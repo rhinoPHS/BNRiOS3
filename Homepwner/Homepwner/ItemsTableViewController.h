@@ -10,10 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ItemsTableViewController : UITableViewController
-{
-//    IBOutlet UIView *headerView;
-}
+@interface ItemsTableViewController : UITableViewController<UIPopoverControllerDelegate>
 
 //-(UIView *)headerView;
 -(IBAction)addNewItem:(id)sender;

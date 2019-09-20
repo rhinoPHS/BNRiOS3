@@ -12,7 +12,10 @@
 #import "DetailViewController.h"
 #import "HomepwnerItemCell.h"
 
-@interface ItemsTableViewController ()
+#import "Model/BNRImageStore.h"
+#import "ImageViewController.h"
+
+@interface ItemsTableViewController ()<UIPopoverPresentationControllerDelegate>
 
 @end
 
@@ -126,6 +129,14 @@
         cell.titleLabel.text = p.itemName;
         cell.idLabel.text = p.serialNumber;
         cell.valueLabel.text = [NSString stringWithFormat:@"$%d",p.valueInDollars];
+        
+        if(p.valueInDollars > 50) {
+            cell.valueLabel.textColor = [UIColor greenColor];
+        } else {
+            cell.valueLabel.textColor = [UIColor redColor];
+        }
+        
+        
         cell.thumbNameImageView.image = p.thumbnail;
      } else  {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
@@ -166,6 +177,25 @@
 
 -(void)showImage:(id)sender atIndexPath:(NSIndexPath *)ip {
     NSLog(@"Going to show the image for %@",ip);
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        BNRItem *i = [[[ItemStore sharedStore] allItems] objectAtIndex:[ip row]];
+        NSString *imageKey = [i imageKey];
+        
+        UIImage *img = [[BNRImageStore sharedStore] imageForKey:imageKey];
+        if(!img) { return ;}
+        
+        CGRect rect = [[self view] convertRect:[sender bounds] fromView:sender];
+        
+        ImageViewController *ivc = [[ImageViewController alloc] init];
+        [ivc setImage:img];
+        
+        ivc.modalPresentationStyle = UIModalPresentationPopover;
+        ivc.preferredContentSize = CGSizeMake(600, 600);
+        ivc.popoverPresentationController.sourceView = self.view;
+        ivc.popoverPresentationController.sourceRect = rect;
+        
+        [self presentViewController:ivc animated:YES completion:nil];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
