@@ -11,7 +11,7 @@
 		970BA5B4232F3AE200A07195 /* HomepwnerItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970BA5B2232F3AE200A07195 /* HomepwnerItemCell.xib */; };
 		970BA5B82333BD3200A07195 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970BA5B62333BD3200A07195 /* ImageViewController.m */; };
 		970BA5B92333BD3200A07195 /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970BA5B72333BD3200A07195 /* ImageViewController.xib */; };
-		970BA5BC2335C70B00A07195 /* Homepwner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970BA5BA2335C70B00A07195 /* Homepwner.xcdatamodeld */; };
+		970BA5C62335D3F200A07195 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 970BA5C52335D3F200A07195 /* BNRItem.m */; };
 		97104C0D231F2A040036BA95 /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 97104C0C231F2A040036BA95 /* BNRImageStore.m */; };
 		975721B8232A440B00FEE0D2 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 975721B6232A440B00FEE0D2 /* CameraOverlayView.m */; };
 		9789AEC3230F61CA004F43F3 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9789AEC2230F61CA004F43F3 /* HeaderView.xib */; };
@@ -24,7 +24,6 @@
 		978C0F832304057100FFF631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 978C0F812304057100FFF631 /* LaunchScreen.storyboard */; };
 		978C0F862304057100FFF631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C0F852304057100FFF631 /* main.m */; };
 		978C0F8E2304060F00FFF631 /* ItemsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C0F8D2304060F00FFF631 /* ItemsTableViewController.m */; };
-		978C0F92230409EE00FFF631 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C0F90230409EE00FFF631 /* BNRItem.m */; };
 		978C0F9523040BA000FFF631 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C0F9423040BA000FFF631 /* ItemStore.m */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,8 @@
 		970BA5B52333BD3200A07195 /* ImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		970BA5B62333BD3200A07195 /* ImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		970BA5B72333BD3200A07195 /* ImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
-		970BA5BB2335C70B00A07195 /* Homepwner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Homepwner.xcdatamodel; sourceTree = "<group>"; };
+		970BA5C42335D3F200A07195 /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
+		970BA5C52335D3F200A07195 /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		97104C0B231F2A040036BA95 /* BNRImageStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		97104C0C231F2A040036BA95 /* BNRImageStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 		975721B6232A440B00FEE0D2 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
@@ -56,8 +56,6 @@
 		978C0F852304057100FFF631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		978C0F8C2304060F00FFF631 /* ItemsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemsTableViewController.h; sourceTree = "<group>"; };
 		978C0F8D2304060F00FFF631 /* ItemsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemsTableViewController.m; sourceTree = "<group>"; };
-		978C0F90230409EE00FFF631 /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
-		978C0F91230409EE00FFF631 /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
 		978C0F9323040BA000FFF631 /* ItemStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
 		978C0F9423040BA000FFF631 /* ItemStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,13 +121,12 @@
 		978C0F8F230409E500FFF631 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				978C0F91230409EE00FFF631 /* BNRItem.h */,
-				978C0F90230409EE00FFF631 /* BNRItem.m */,
+				970BA5C42335D3F200A07195 /* BNRItem.h */,
+				970BA5C52335D3F200A07195 /* BNRItem.m */,
 				978C0F9323040BA000FFF631 /* ItemStore.h */,
 				978C0F9423040BA000FFF631 /* ItemStore.m */,
 				97104C0B231F2A040036BA95 /* BNRImageStore.h */,
 				97104C0C231F2A040036BA95 /* BNRImageStore.m */,
-				970BA5BA2335C70B00A07195 /* Homepwner.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +162,7 @@
 				TargetAttributes = {
 					978C0F722304056F00FFF631 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -209,13 +207,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				978C0F8E2304060F00FFF631 /* ItemsTableViewController.m in Sources */,
+				970BA5C62335D3F200A07195 /* BNRItem.m in Sources */,
 				975721B8232A440B00FEE0D2 /* CameraOverlayView.m in Sources */,
 				9789AECC231609EE004F43F3 /* DatePickerViewController.m in Sources */,
-				978C0F92230409EE00FFF631 /* BNRItem.m in Sources */,
 				970BA5B82333BD3200A07195 /* ImageViewController.m in Sources */,
 				978C0F862304057100FFF631 /* main.m in Sources */,
 				97104C0D231F2A040036BA95 /* BNRImageStore.m in Sources */,
-				970BA5BC2335C70B00A07195 /* Homepwner.xcdatamodeld in Sources */,
 				970BA5B3232F3AE200A07195 /* HomepwnerItemCell.m in Sources */,
 				978C0F782304057000FFF631 /* AppDelegate.m in Sources */,
 				978C0F9523040BA000FFF631 /* ItemStore.m in Sources */,
@@ -353,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7MBG3B536;
 				INFOPLIST_FILE = Homepwner/Info.plist;
@@ -362,6 +360,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rhino.Homepwner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Homepwner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -370,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7MBG3B536;
 				INFOPLIST_FILE = Homepwner/Info.plist;
@@ -379,6 +381,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rhino.Homepwner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Homepwner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -405,19 +409,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		970BA5BA2335C70B00A07195 /* Homepwner.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				970BA5BB2335C70B00A07195 /* Homepwner.xcdatamodel */,
-			);
-			currentVersion = 970BA5BB2335C70B00A07195 /* Homepwner.xcdatamodel */;
-			path = Homepwner.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 978C0F6B2304056F00FFF631 /* Project object */;
 }
