@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HypnosisView : UIView
-
+{
+    CALayer *boxLayer;
+}
 @property (nonatomic, strong) UIColor *circleColor;
 
 @end

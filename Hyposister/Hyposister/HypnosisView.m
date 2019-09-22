@@ -14,10 +14,58 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
         [self setCircleColor:[UIColor lightGrayColor]];
+        
+        //Create the new layer object
+        boxLayer = [[CALayer alloc] init];
+        
+        //Give it a size
+        [boxLayer setBounds:CGRectMake(0.0, 0.0, 85.0, 85.0)];
+        
+        //Give it a location
+        [boxLayer setPosition:CGPointMake(160.0, 100.0)];
+        
+        // Make half-trasparent red the backgound color for the layer
+        UIColor *reddish = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5];
+        
+        // Get a CGColor object with the same color values
+        CGColorRef cgReddish = [reddish CGColor];
+        [boxLayer setBackgroundColor:cgReddish];
+        
+        //Create a UIImage
+        UIImage *layerImage = [UIImage imageNamed:@"Hypno.png"];
+        //Get the underlyingCGImage
+        CGImageRef image = [layerImage  CGImage];
+        
+        // Put the CGImage on the layer
+        [boxLayer setContents:(__bridge id)image];
+        
+        // Inset the image a bit on each isde
+        [boxLayer setContentsRect:CGRectMake(-0.1, -0.1, 1.2, 1.2)];
+        // Let the image resize (without chaning the aspect ratio)
+        // to fill the contentRect
+        [boxLayer setContentsGravity:kCAGravityResizeAspect];
+        
+        // Make it a sublayer of the view's layer
+        [[self layer] addSublayer:boxLayer];
     }
     return self;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *t = [touches anyObject];
+    CGPoint p = [t locationInView:self];
+    [boxLayer setPosition:p];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *t =[touches anyObject];
+    CGPoint p = [t locationInView:self];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [boxLayer setPosition:p];
+    [CATransaction commit];
 }
 
 // Only override drawRect: if you perform custom drawing.
