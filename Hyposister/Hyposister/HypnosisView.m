@@ -56,7 +56,16 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *t = [touches anyObject];
     CGPoint p = [t locationInView:self];
+//    CABasicAnimation *ba = [CABasicAnimation animationWithKeyPath:@"position"];
+//    [ba setFromValue:[NSValue valueWithCGPoint:[boxLayer position]]];
+//    [ba setToValue:[NSValue valueWithCGPoint:p]];
+//    [ba setDuration:3.0];
+    
+    // Update the model layer
     [boxLayer setPosition:p];
+    
+    // Add animation that will gradually update presentation layer
+//    [boxLayer addAnimation:ba forKey:@"foo"];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
