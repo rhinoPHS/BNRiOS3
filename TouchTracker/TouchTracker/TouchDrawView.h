@@ -7,17 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Line;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TouchDrawView : UIView
+@interface TouchDrawView : UIView<UIGestureRecognizerDelegate>
 {
     NSMutableDictionary *linesInProcess;
     NSMutableArray *completeLines;
+    UIPanGestureRecognizer *moveRecognizer;
 }
 
 -(void)clearAll;
 -(void)endTouches:(NSSet *)touches;
+
+@property (nonatomic, weak) Line *selectedLine;
+-(Line *)lineAtPoint:(CGPoint)p;
 
 @end
 
