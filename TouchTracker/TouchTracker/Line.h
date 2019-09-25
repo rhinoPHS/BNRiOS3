@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) CGPoint begin;
 @property (nonatomic) CGPoint end;
-
+@property (nonatomic, weak) NSMutableArray *contaningArray;
 
 @end
 

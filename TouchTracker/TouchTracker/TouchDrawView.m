@@ -182,7 +182,8 @@
 
 -(void)clearAll {
     [linesInProcess removeAllObjects];
-    [completeLines removeAllObjects];
+//    [completeLines removeAllObjects];
+    completeLines = [NSMutableArray new];
     
     // Redraw
     [self setNeedsDisplay];
@@ -236,6 +237,7 @@
         if(line) {
             [completeLines addObject:line];
             [linesInProcess removeObjectForKey:key];
+            [line setContaningArray:completeLines];
         }
     }
     [self setNeedsDisplay];

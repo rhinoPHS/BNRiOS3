@@ -65,9 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				970BA6382337A6BF00A07195 /* Line.h */,
+				970BA6392337A6BF00A07195 /* Line.m */,
 				970BA63B2337A73700A07195 /* TouchDrawView.h */,
 				970BA63C2337A73700A07195 /* TouchDrawView.m */,
-				970BA6392337A6BF00A07195 /* Line.m */,
 				970BA6222337A69C00A07195 /* AppDelegate.h */,
 				970BA6232337A69C00A07195 /* AppDelegate.m */,
 				970BA6252337A69C00A07195 /* ViewController.h */,
