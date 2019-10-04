@@ -12,6 +12,9 @@
 		970BA654233D8E3E00A07195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970BA653233D8E3E00A07195 /* Assets.xcassets */; };
 		970BA657233D8E3E00A07195 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970BA655233D8E3E00A07195 /* LaunchScreen.storyboard */; };
 		970BA65A233D8E3E00A07195 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 970BA659233D8E3E00A07195 /* main.m */; };
+		9769B0A623471A53005B51BC /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0A523471A53005B51BC /* RSSChannel.m */; };
+		9769B0A9234721FD005B51BC /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0A8234721FD005B51BC /* RSSItem.m */; };
+		9769B0AC23475730005B51BC /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0AB23475730005B51BC /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,12 @@
 		970BA656233D8E3E00A07195 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		970BA658233D8E3E00A07195 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		970BA659233D8E3E00A07195 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9769B0A423471A53005B51BC /* RSSChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSChannel.h; sourceTree = "<group>"; };
+		9769B0A523471A53005B51BC /* RSSChannel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSChannel.m; sourceTree = "<group>"; };
+		9769B0A7234721FD005B51BC /* RSSItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSItem.h; sourceTree = "<group>"; };
+		9769B0A8234721FD005B51BC /* RSSItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSItem.m; sourceTree = "<group>"; };
+		9769B0AA23475730005B51BC /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		9769B0AB23475730005B51BC /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +69,16 @@
 				970BA64B233D8E3D00A07195 /* AppDelegate.m */,
 				970BA64D233D8E3D00A07195 /* ViewController.h */,
 				970BA64E233D8E3D00A07195 /* ViewController.m */,
+				9769B0AA23475730005B51BC /* WebViewController.h */,
+				9769B0AB23475730005B51BC /* WebViewController.m */,
+				9769B0A7234721FD005B51BC /* RSSItem.h */,
+				9769B0A8234721FD005B51BC /* RSSItem.m */,
 				970BA653233D8E3E00A07195 /* Assets.xcassets */,
 				970BA655233D8E3E00A07195 /* LaunchScreen.storyboard */,
 				970BA658233D8E3E00A07195 /* Info.plist */,
 				970BA659233D8E3E00A07195 /* main.m */,
+				9769B0A423471A53005B51BC /* RSSChannel.h */,
+				9769B0A523471A53005B51BC /* RSSChannel.m */,
 			);
 			path = Nerdfeed;
 			sourceTree = "<group>";
@@ -137,6 +152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9769B0A623471A53005B51BC /* RSSChannel.m in Sources */,
+				9769B0AC23475730005B51BC /* WebViewController.m in Sources */,
+				9769B0A9234721FD005B51BC /* RSSItem.m in Sources */,
 				970BA64F233D8E3D00A07195 /* ViewController.m in Sources */,
 				970BA65A233D8E3E00A07195 /* main.m in Sources */,
 				970BA64C233D8E3D00A07195 /* AppDelegate.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "WebViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,9 @@
     
     ViewController *vc = [[ViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *masterNav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    WebViewController *wvc = [WebViewController new];
+    [vc setWebViewController:wvc];
     
     [[self window] setRootViewController:masterNav];
     self.window.backgroundColor = [UIColor whiteColor];

@@ -7,8 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RSSChannel;
+@class WebViewController;
 
-@interface ViewController : UITableViewController
+@interface ViewController : UITableViewController <NSXMLParserDelegate>
+//{
+//    NSURLConnection *connection;
+//    NSMutableData *xmlData;
+//}
+
+//@property (nonatomic)  NSURLConnection *connection;
+@property (nonatomic)  NSMutableData *xmlData;
+@property (nonatomic) RSSChannel *channel;
+@property (nonatomic, strong) WebViewController *webViewController;
+
+-(void)fetchEntries;
 
 
 @end
