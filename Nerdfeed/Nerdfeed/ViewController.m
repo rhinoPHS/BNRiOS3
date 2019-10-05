@@ -10,6 +10,7 @@
 #import "RSSChannel.h"
 #import "RSSItem.h"
 #import "WebViewController.h"
+#import "ChannelViewController.h"
 
 @interface ViewController ()
 
@@ -20,9 +21,38 @@
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if(self) {
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithTitle:@"Info"
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(showInfo:)];
+        [[self navigationItem] setRightBarButtonItem:bbi];
         [self fetchEntries];
     }
     return self;
+}
+
+-(void)showInfo:(id)sender {
+    ChannelViewController *channelVC = [[ChannelViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    if([self splitViewController]) {
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:channelVC];
+        
+        NSArray *vcs = [NSArray arrayWithObjects:self.navigationController,nvc, nil];
+        
+        [[self splitViewController] setViewControllers:vcs];
+        
+        //Make detail view controller the delegate of the spit view controller
+        [[self splitViewController] setDelegate:channelVC];
+        
+        // if a row has been seleted, deselect it so that a row
+        // is not selected when viewing the info
+        NSIndexPath *seletedRow = [[self tableView]indexPathForSelectedRow];
+        if(seletedRow) {
+            [[self tableView] deselectRowAtIndexPath:seletedRow animated:YES];
+        }
+    } else {
+        [[self navigationController] pushViewController:channelVC animated:YES];
+    }
+    [channelVC listViewController:self handleObject:self.channel];
 }
 
 - (void)viewDidLoad {
@@ -85,15 +115,28 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[self navigationController] pushViewController:_webViewController animated:YES];
+    if(![self splitViewController])
+        [[self navigationController] pushViewController:_webViewController animated:YES];
+    else {
+        // We have to create a new navigation controllrer, as the old one
+        // was only retained by the split view controller and is now gone
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_webViewController];
+        
+        NSArray *vcs = [NSArray arrayWithObjects:self.navigationController, nav, nil];
+        [self.splitViewController setViewControllers:vcs];
+        
+        // Make the detail view controller the delegate of the split view controller
+        // - ignore this warning
+        [self.splitViewController setDelegate:_webViewController];
+    }
     
     RSSItem *entry = [[_channel items] objectAtIndex:[indexPath row]];
     
-    NSURL *url = [NSURL URLWithString:entry.link];
-    
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    [_webViewController.webView loadRequest:req];
-    _webViewController.navigationItem.title = entry.title;
+//    NSURL *url = [NSURL URLWithString:entry.link];
+//    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+//    [_webViewController.webView loadRequest:req];
+//    _webViewController.navigationItem.title = entry.title;
+    [_webViewController listViewController:self handleObject:entry];
 }
 
 - (void)parser:(NSXMLParser *)parser

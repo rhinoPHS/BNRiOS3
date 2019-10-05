@@ -27,10 +27,19 @@
     WebViewController *wvc = [WebViewController new];
     [vc setWebViewController:wvc];
     
-    [[self window] setRootViewController:masterNav];
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:wvc];
+        NSArray *vcs =[NSArray arrayWithObjects:masterNav, detailNav, nil];
+        UISplitViewController *svc = [[UISplitViewController alloc] init];
+        [svc setDelegate:wvc];
+        [svc setViewControllers:vcs];
+        [[self window] setRootViewController:svc];
+    } else {
+        [[self window] setRootViewController:masterNav];
+    }
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
     return YES;
 }
 

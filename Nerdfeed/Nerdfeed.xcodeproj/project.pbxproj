@@ -15,6 +15,7 @@
 		9769B0A623471A53005B51BC /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0A523471A53005B51BC /* RSSChannel.m */; };
 		9769B0A9234721FD005B51BC /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0A8234721FD005B51BC /* RSSItem.m */; };
 		9769B0AC23475730005B51BC /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769B0AB23475730005B51BC /* WebViewController.m */; };
+		97A6CBF5234874E10033A0C1 /* ChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A6CBF4234874E10033A0C1 /* ChannelViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		9769B0A8234721FD005B51BC /* RSSItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSItem.m; sourceTree = "<group>"; };
 		9769B0AA23475730005B51BC /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		9769B0AB23475730005B51BC /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		97A6CBF3234874E10033A0C1 /* ChannelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChannelViewController.h; sourceTree = "<group>"; };
+		97A6CBF4234874E10033A0C1 /* ChannelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChannelViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,8 @@
 				970BA64B233D8E3D00A07195 /* AppDelegate.m */,
 				970BA64D233D8E3D00A07195 /* ViewController.h */,
 				970BA64E233D8E3D00A07195 /* ViewController.m */,
+				97A6CBF3234874E10033A0C1 /* ChannelViewController.h */,
+				97A6CBF4234874E10033A0C1 /* ChannelViewController.m */,
 				9769B0AA23475730005B51BC /* WebViewController.h */,
 				9769B0AB23475730005B51BC /* WebViewController.m */,
 				9769B0A7234721FD005B51BC /* RSSItem.h */,
@@ -158,6 +163,7 @@
 				970BA64F233D8E3D00A07195 /* ViewController.m in Sources */,
 				970BA65A233D8E3E00A07195 /* main.m in Sources */,
 				970BA64C233D8E3D00A07195 /* AppDelegate.m in Sources */,
+				97A6CBF5234874E10033A0C1 /* ChannelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

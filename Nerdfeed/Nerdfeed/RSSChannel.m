@@ -55,6 +55,30 @@ didStartElement:(NSString *)elementName
     _currentString = nil;
     if([elementName isEqualToString:@"channel"]) {
         [parser setDelegate:_parentParserDelegate];
+        [self trimItemTitles];
+    }
+}
+
+-(void)trimItemTitles {
+    // Create a regular expression with the pattern: Author
+    NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"Declarative"
+                                                                    options:0 error:nil];
+    // Loop through every title of the items in channel
+    for(RSSItem *i in _items) {
+        NSString *itemTitle = [i title];
+        
+        // Find matches in the title string. The range
+        // argument specifies specifies how much of the title to search;
+        // in this case, all of it.
+        NSArray *matches =[reg matchesInString:itemTitle options:0 range:NSMakeRange(0, [itemTitle length])];
+        
+        // If there was a match...
+        if([matches count] > 0) {
+            //Print the location of the match in the string and the stirng
+            NSTextCheckingResult *result = [matches objectAtIndex:0];
+            NSRange r = [result range];
+            NSLog(@"Match at {%d, %d} for %@!", (int)r.location, (int)r.length, itemTitle);
+        }
     }
 }
 

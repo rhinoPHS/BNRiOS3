@@ -23,6 +23,9 @@
 
 -(void)fetchEntries;
 
+@end
 
+@protocol ViewControllerDelegate
+-(void)listViewController:(ViewController *)lvc handleObject:(id)object;
 @end
 

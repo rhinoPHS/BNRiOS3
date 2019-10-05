@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "RSSItem.h"
 
 @interface WebViewController () <WKNavigationDelegate>
 @property (nonatomic, strong) UIBarButtonItem *backBtn;
@@ -17,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 //    [self.webView addObserver:self forKeyPath:@"URL" options:NSKeyValueObservingOptionNew context:NULL];
     
     [self addToolbar];
@@ -40,6 +40,9 @@
     _backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     _goBtn = [[UIBarButtonItem alloc] initWithTitle:@"Go" style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
     NSArray *items = [NSArray arrayWithObjects:_backBtn, _goBtn, flexibleItem, nil];
+    
+    
+    
     self.toolbarItems = items;
 }
 
@@ -68,6 +71,23 @@
 
 - (WKWebView *)webView {
     return (WKWebView *)[self view];
+}
+
+- (void)listViewController:(ViewController *)lvc handleObject:(id)object {
+    RSSItem *entry = object;
+    if(![entry isKindOfClass:[RSSItem class]]) {
+        return;
+    }
+    NSURL *url = [NSURL URLWithString:entry.link];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    [[self webView] loadRequest:req];
+    [[self navigationItem] setTitle:entry.title];
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
+    if(displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+        self.navigationItem.leftBarButtonItem = svc.displayModeButtonItem;
+    }
 }
 
 @end
