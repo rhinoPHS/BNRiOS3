@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BNRFeedStore *)sharedStore;
 //@property (nonatomic)  NSMutableData *xmlData;
+@property (nonatomic, strong) NSDate *topSongsCacheDate;
 -(void)fetchRSSFeedWithCompletion:(void (^)(RSSChannel *obj, NSError *err))block;
 -(void)fetchTopSongs:(int)count withCompletioon:(void (^)(RSSChannel *obj, NSError *err))block;
 

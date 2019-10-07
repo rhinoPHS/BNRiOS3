@@ -36,7 +36,7 @@
         if(data) {
             [weakSelf.xmlData appendData:data];
             NSString *xmlCheck = [[NSString alloc] initWithData:weakSelf.xmlData encoding:NSUTF8StringEncoding];
-            NSLog(@"xmlCheck = %@", xmlCheck);
+//            NSLog(@"xmlCheck = %@", xmlCheck);
             
             if(weakSelf.xmlRootObject) {
                 rootObject = weakSelf.xmlRootObject;

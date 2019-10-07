@@ -83,6 +83,7 @@
     __weak ViewController *weakSelf = self;
     
     void (^compltetionBlock)(RSSChannel * _Nonnull obj, NSError * _Nonnull err) = ^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
+        NSLog(@"Completion block called!");
         dispatch_async(dispatch_get_main_queue(), ^{
              [self.navigationItem setTitleView:currentTitleView];
         });
@@ -102,6 +103,8 @@
     } else if (_rssType == RSSTypeApple) {
         [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletioon:compltetionBlock];
     }
+    
+    NSLog(@"Executing code at the end of fetchEntries");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

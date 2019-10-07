@@ -22,6 +22,24 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:_items forKey:@"items"];
+    [coder encodeObject:_title forKey:@"title"];
+    [coder encodeObject:_infoString forKey:@"infoString"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        _items = [coder decodeObjectForKey:@"items"];
+        [self setInfoString:[coder decodeObjectForKey:@"infoString"]];
+        [self setTitle:[coder decodeObjectForKey:@"title"]];
+    }
+    return self;
+}
+
 - (void)parser:(NSXMLParser *)parser
 didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
@@ -99,6 +117,10 @@ didStartElement:(NSString *)elementName
         [i readFromJSONDictionary:entry];
         [_items addObject:i];
     }
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

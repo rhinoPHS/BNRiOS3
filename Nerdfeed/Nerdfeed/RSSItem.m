@@ -10,6 +10,22 @@
 
 @implementation RSSItem
 
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:_title forKey:@"title"];
+    [coder encodeObject:_link forKey:@"link"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        [self setTitle:[coder decodeObjectForKey:@"title"]];
+        [self setLink:[coder decodeObjectForKey:@"link"]];
+    }
+    return self;
+}
+
 - (void)parser:(NSXMLParser *)parser
 didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
@@ -59,6 +75,10 @@ didStartElement:(NSString *)elementName
         // the href of an attribute object is the URL for sample audio file
         [self setLink:[sampleDict objectForKey:@"href"]];
     }
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RSSChannel : NSObject <NSXMLParserDelegate, JSONSerializable>
+@interface RSSChannel : NSObject <NSXMLParserDelegate, JSONSerializable, NSCoding, NSSecureCoding>
 
 @property (nonatomic, weak) id parentParserDelegate;
 
