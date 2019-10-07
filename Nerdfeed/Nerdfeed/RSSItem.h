@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONSerializable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RSSItem : NSObject<NSXMLParserDelegate>
+@interface RSSItem : NSObject<NSXMLParserDelegate, JSONSerializable>
 
 @property (nonatomic, copy) NSMutableString *currentString;
 @property (nonatomic, weak) id parentParserDelegate;

@@ -10,16 +10,16 @@
 @class RSSChannel;
 @class WebViewController;
 
-@interface ViewController : UITableViewController <NSXMLParserDelegate>
-//{
-//    NSURLConnection *connection;
-//    NSMutableData *xmlData;
-//}
+typedef NS_ENUM(int, RSSType) {
+    RSSTypeBNR,
+    RSSTypeApple
+};
 
-//@property (nonatomic)  NSURLConnection *connection;
-@property (nonatomic)  NSMutableData *xmlData;
+@interface ViewController : UITableViewController
+
 @property (nonatomic) RSSChannel *channel;
 @property (nonatomic, strong) WebViewController *webViewController;
+@property (nonatomic) RSSType rssType;
 
 -(void)fetchEntries;
 

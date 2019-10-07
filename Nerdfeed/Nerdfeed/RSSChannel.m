@@ -35,7 +35,8 @@ didStartElement:(NSString *)elementName
     } else if ([elementName isEqualToString:@"description"]) {
         _currentString = [NSMutableString new];
         [self setInfoString:_currentString];
-    } else if ([elementName isEqualToString:@"item"]) {
+    } else if ([elementName isEqualToString:@"item"]
+               || [elementName isEqualToString:@"entry"]) {
         RSSItem *entry = [RSSItem new];
         [entry setParentParserDelegate:self];
         [parser setDelegate:entry];
@@ -79,6 +80,24 @@ didStartElement:(NSString *)elementName
             NSRange r = [result range];
             NSLog(@"Match at {%d, %d} for %@!", (int)r.location, (int)r.length, itemTitle);
         }
+    }
+}
+
+- (void)readFromJSONDictionary:(NSDictionary *)d {
+    // The top-level object contains a "feed" object, which is the channel.
+    NSDictionary *feed = [d objectForKey:@"feed"];
+    
+    // The feed has a title property, make this the title of our channel.
+    [self setTitle:[[feed objectForKey:@"title"] objectForKey:@"label"]];
+    
+    // The feed also has an array of entries, for each one, make a new RSSItem.
+    NSArray *entries = [feed objectForKey:@"entry"];
+    for(NSDictionary *entry in entries) {
+        RSSItem *i = [RSSItem new];
+        
+        // Pass the entry dictionary to the item so it can grab its ivars
+        [i readFromJSONDictionary:entry];
+        [_items addObject:i];
     }
 }
 

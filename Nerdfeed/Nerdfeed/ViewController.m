@@ -11,6 +11,7 @@
 #import "RSSItem.h"
 #import "WebViewController.h"
 #import "ChannelViewController.h"
+#import "BNRFeedStore.h"
 
 @interface ViewController ()
 
@@ -26,9 +27,20 @@
                                                                target:self
                                                                action:@selector(showInfo:)];
         [[self navigationItem] setRightBarButtonItem:bbi];
+        
+        UISegmentedControl *rssTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"BNR", @"Apple", nil]];
+        [rssTypeControl setSelectedSegmentIndex:0];
+        [rssTypeControl addTarget:self action:@selector(changeType:) forControlEvents:UIControlEventValueChanged];
+        [[self navigationItem] setTitleView:rssTypeControl];
+        
         [self fetchEntries];
     }
     return self;
+}
+
+-(void)changeType:(id)sender {
+    _rssType = (RSSType)[sender selectedSegmentIndex];
+    [self fetchEntries];
 }
 
 -(void)showInfo:(id)sender {
@@ -61,39 +73,35 @@
 }
 
 - (void)fetchEntries {
-    _xmlData = [[NSMutableData alloc] init];
+    UIView *currentTitleView = self.navigationItem.titleView;
+    UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [self.navigationItem setTitleView:aiView];
+    [aiView startAnimating];
     
-    NSURL *url = [NSURL URLWithString:@"https://www.cocoawithlove.com/feed.xml"];
-//    NSURL *url = [NSURL URLWithString:@"https://www.apple.com/newsroom/rss-feed.rss"];
     
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
     
     __weak ViewController *weakSelf = self;
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"%@", error);
-            return;
-        }
+    void (^compltetionBlock)(RSSChannel * _Nonnull obj, NSError * _Nonnull err) = ^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+             [self.navigationItem setTitleView:currentTitleView];
+        });
         
-        if(data) {
-            [weakSelf.xmlData appendData:data];
-            NSString *xmlCheck = [[NSString alloc] initWithData:weakSelf.xmlData encoding:NSUTF8StringEncoding];
-            NSLog(@"xmlCheck = %@", xmlCheck);
-            
-            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-            [parser setDelegate:self];
-            [parser parse];
-            data = nil;
+        if(!err) {
+            weakSelf.channel = obj;
             dispatch_async(dispatch_get_main_queue(), ^{
-               [[self tableView] reloadData];
+                 [self.navigationItem setTitleView:currentTitleView];
+                [[self tableView] reloadData];
             });
-            
-            NSLog(@"abcchannel : %@\n abcchannelTitle : %@\n abcinfoString : %@\n", weakSelf.channel, [weakSelf.channel title], [weakSelf.channel infoString]);
+        } else {
+            NSLog(@"%@", err);
         }
-    }];
-    [task resume];
+    };
+    if(_rssType == RSSTypeBNR) {
+        [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:compltetionBlock];
+    } else if (_rssType == RSSTypeApple) {
+        [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletioon:compltetionBlock];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,27 +139,7 @@
     }
     
     RSSItem *entry = [[_channel items] objectAtIndex:[indexPath row]];
-    
-//    NSURL *url = [NSURL URLWithString:entry.link];
-//    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-//    [_webViewController.webView loadRequest:req];
-//    _webViewController.navigationItem.title = entry.title;
     [_webViewController listViewController:self handleObject:entry];
-}
-
-- (void)parser:(NSXMLParser *)parser
-didStartElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName
-    attributes:(NSDictionary<NSString *,NSString *> *)attributeDict {
-    NSLog(@"%@ found a %@ element", self, elementName);
-    if([elementName isEqualToString:@"channel"]) {
-        _channel = [RSSChannel new];
-        
-        [_channel setParentParserDelegate:self];
-        
-        [parser setDelegate:_channel];
-    }
 }
 
 @end
