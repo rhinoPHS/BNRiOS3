@@ -78,27 +78,9 @@
     [self.navigationItem setTitleView:aiView];
     [aiView startAnimating];
     
-    
-    
     __weak ViewController *weakSelf = self;
     
-    void (^compltetionBlock)(RSSChannel * _Nonnull obj, NSError * _Nonnull err) = ^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
-        NSLog(@"Completion block called!");
-        
-        if(!err) {
-            weakSelf.channel = obj;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.navigationItem setTitleView:currentTitleView];
-                [[self tableView] reloadData];
-            });
-        } else {
-            NSLog(@"error in fetchTopSongs : %@", err);
-        }
-    };
     if(_rssType == RSSTypeBNR) {
-//        _channel = [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:compltetionBlock];
-//        [self.tableView reloadData];
-        
         _channel = [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
             NSLog(@"Completion block called! RSSTypeBNR");
             // Replace the activity indicator.
@@ -133,9 +115,20 @@
         }];
         [self.tableView reloadData];
     } else if (_rssType == RSSTypeApple) {
-        [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletioon:compltetionBlock];
+        [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletioon:^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
+            NSLog(@"Completion block called! in RSSTypeApple");
+            
+            if(!err) {
+                weakSelf.channel = obj;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationItem setTitleView:currentTitleView];
+                    [[self tableView] reloadData];
+                });
+            } else {
+                NSLog(@"error in fetchTopSongs : %@", err);
+            }
+        }];
     }
-    NSLog(@"count : %d", (int)_channel.items.count);
     NSLog(@"Executing code at the end of fetchEntries");
 }
 

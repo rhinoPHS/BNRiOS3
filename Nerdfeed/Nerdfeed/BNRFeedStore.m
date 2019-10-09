@@ -46,7 +46,6 @@
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     cachePath = [cachePath stringByAppendingPathComponent:@"nerd.archive"];
     
-    // Load the cached channel
     NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
     NSSet *classes = [NSSet setWithArray:@[
         [NSMutableArray class],
@@ -56,14 +55,11 @@
     ]];
     
     NSError *error;
+    RSSChannel *cachedChannel = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
     if(error) {
         NSLog(@"unarchive error in fetchRSSFeedWithCompletion : %@", error);
         block(nil,error);
         return nil;
-    }
-    RSSChannel *cachedChannel = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
-    if(error) {
-        NSLog(@"error in cachedChannel : %@", error);
     }
     
     if(!cachedChannel)
@@ -181,14 +177,16 @@
             } else {
                 NSLog(@"isWriteToFile fail %@", cachePath);
             }
+            
+            NSLog(@"data received from server");
+            //This is the controller's completion code;
+            block(obj,err);
+            
         } else {
             block(nil,err);
             NSLog(@"BNRFeedStore err : %@", err);
             return;
         }
-        NSLog(@"data received from server");
-        //This is the controller's completion code;
-        block(obj,err);
     }];
     
     // let the empty channel parse the returning data from the web service
