@@ -123,4 +123,28 @@ didStartElement:(NSString *)elementName
     return YES;
 }
 
+- (void)addItemsFromChannel:(RSSChannel *)otherChannel {
+    for(RSSItem *i in [otherChannel items]) {
+        // If self's items does not contain this item, add it
+        if(![self.items containsObject:i]) {
+            [self.items addObject:i];
+        }
+    }
+    
+    //Sort the array of items by publication date
+    [self.items sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [[obj2 publicationDate] compare:[obj1 publicationDate]];
+    }];
+}
+
+
+
+- (nonnull id)copyWithZone:(nullable NSZone *)zone { 
+    RSSChannel *c = [[[self class] alloc] init];
+    [c setTitle:self.title];
+    [c setInfoString:self.infoString];
+    c->_items = [self.items mutableCopy];
+    return c;
+}
+
 @end

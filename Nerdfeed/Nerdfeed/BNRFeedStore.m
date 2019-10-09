@@ -30,7 +30,7 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"topSongsCacheDate"];
 }
 
-- (void)fetchRSSFeedWithCompletion:(void (^)(RSSChannel * _Nonnull obj, NSError * _Nonnull err))block {
+- (RSSChannel *)fetchRSSFeedWithCompletion:(void (^)(RSSChannel * _Nullable obj, NSError * _Nullable err))block {
     NSURL *url = [NSURL URLWithString:@"https://www.cocoawithlove.com/feed.xml"];
     
     RSSChannel *channel = [RSSChannel new];
@@ -39,13 +39,69 @@
     BNRFeedActor *actor = [[BNRFeedActor alloc] initWIthNSURL:url];
     
     // When the connection completes, this block from the controller will be called
-    [actor setCompletionBlock:block];
+//    [actor setCompletionBlock:block];
+    
+    
+    /// p.539
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    cachePath = [cachePath stringByAppendingPathComponent:@"nerd.archive"];
+    
+    // Load the cached channel
+    NSData *data = [[NSData alloc] initWithContentsOfFile:cachePath];
+    NSSet *classes = [NSSet setWithArray:@[
+        [NSMutableArray class],
+        [RSSChannel class],
+        [RSSItem class],
+        [NSMutableString class]
+    ]];
+    
+    NSError *error;
+    if(error) {
+        NSLog(@"unarchive error in fetchRSSFeedWithCompletion : %@", error);
+        block(nil,error);
+        return nil;
+    }
+    RSSChannel *cachedChannel = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
+    if(error) {
+        NSLog(@"error in cachedChannel : %@", error);
+    }
+    
+    if(!cachedChannel)
+        cachedChannel = [RSSChannel new];
+    
+    RSSChannel *channelCopy = [cachedChannel copy];
+    
+    [actor setCompletionBlock:^(id  _Nullable obj, NSError * _Nullable err) {
+        if(!err) {
+            NSError *error;
+            [channelCopy addItemsFromChannel:obj];
+            NSData * data = [NSKeyedArchiver archivedDataWithRootObject:channelCopy requiringSecureCoding:NO error:&error];
+            if(error) {
+                block(nil,error);
+                NSLog(@"archived error : %@", error);
+                return;
+            }
+            if([data writeToFile:cachePath atomically:NO]) {
+                NSLog(@"isWriteToFile success %@", cachePath);
+            } else {
+                NSLog(@"isWriteToFile fail %@", cachePath);
+            }
+            block(channelCopy, nil);
+        } else {
+            NSLog(@"archivedDataWithRootObject fail : %@", error);
+            block(nil,error);
+        }
+    }];
+    ///////////////
+    
     
     // let the empty channel parse the returning data from the web service
     [actor setXmlRootObject:channel];
     
     //Begin the connection
     [actor start];
+    
+    return cachedChannel;
     
 }
 
@@ -81,11 +137,11 @@
                 block(nil,error);
                 return;
             }
-            
+             
             if(cachedChannel) {
                 // Execute the controller's completion block to reload its table
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    block(cachedChannel, nil);                    
+                    block(cachedChannel, nil);
                 }];
                 return;
             }

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *author;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *link;
-
+@property (nonatomic, strong) NSDate *publicationDate;
 
 @end
 

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RSSChannel : NSObject <NSXMLParserDelegate, JSONSerializable, NSCoding, NSSecureCoding>
+@interface RSSChannel : NSObject <NSXMLParserDelegate, JSONSerializable, NSCoding, NSSecureCoding, NSCopying>
 
 @property (nonatomic, weak) id parentParserDelegate;
 
@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, strong) NSMutableArray *items;
 @property (nonatomic, copy) NSMutableString *currentString;
 
+-(void)addItemsFromChannel:(RSSChannel *)otherChannel;
+
 @end
+
 
 NS_ASSUME_NONNULL_END

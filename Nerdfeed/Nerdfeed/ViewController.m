@@ -84,9 +84,6 @@
     
     void (^compltetionBlock)(RSSChannel * _Nonnull obj, NSError * _Nonnull err) = ^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
         NSLog(@"Completion block called!");
-        dispatch_async(dispatch_get_main_queue(), ^{
-             [self.navigationItem setTitleView:currentTitleView];
-        });
         
         if(!err) {
             weakSelf.channel = obj;
@@ -95,15 +92,50 @@
                 [[self tableView] reloadData];
             });
         } else {
-            NSLog(@"%@", err);
+            NSLog(@"error in fetchTopSongs : %@", err);
         }
     };
     if(_rssType == RSSTypeBNR) {
-        [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:compltetionBlock];
+//        _channel = [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:compltetionBlock];
+//        [self.tableView reloadData];
+        
+        _channel = [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:^(RSSChannel * _Nonnull obj, NSError * _Nonnull err) {
+            NSLog(@"Completion block called! RSSTypeBNR");
+            // Replace the activity indicator.
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationItem setTitleView:currentTitleView];
+            });
+
+            if(!err) {
+                // How many items are there currnetly>
+                int currentItemCount = (int)[weakSelf.channel.items count];
+
+                //Set our channel to the mergedd one
+                weakSelf.channel = obj;
+
+                //How many items are there now?
+                int newItemCount = (int)[weakSelf.channel.items count];
+
+                //For each new item, insert a new row. The data source will take care of the rest.
+                int itemDelta = newItemCount - currentItemCount;
+                if(itemDelta > 0) {
+                    NSMutableArray *rows = [NSMutableArray array];
+                    for(int i=0; i<itemDelta; i++) {
+                        NSIndexPath *ip = [NSIndexPath indexPathForItem:i inSection:0];
+                        [rows addObject:ip];
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
+                    });
+                }
+            }
+        }];
+        [self.tableView reloadData];
     } else if (_rssType == RSSTypeApple) {
         [[BNRFeedStore sharedStore] fetchTopSongs:10 withCompletioon:compltetionBlock];
     }
-    
+    NSLog(@"count : %d", (int)_channel.items.count);
     NSLog(@"Executing code at the end of fetchEntries");
 }
 

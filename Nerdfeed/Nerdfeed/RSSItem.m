@@ -14,6 +14,7 @@
 {
     [coder encodeObject:_title forKey:@"title"];
     [coder encodeObject:_link forKey:@"link"];
+    [coder encodeObject:_publicationDate forKey:@"publicationDate"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -22,6 +23,7 @@
     if (self) {
         [self setTitle:[coder decodeObjectForKey:@"title"]];
         [self setLink:[coder decodeObjectForKey:@"link"]];
+        [self setPublicationDate:[coder decodeObjectForKey:@"publicationDate"]];
     }
     return self;
 }
@@ -45,6 +47,8 @@ didStartElement:(NSString *)elementName
     } else if ([elementName isEqualToString:@"category"]) {
         _currentString = [NSMutableString new];
         [self setCategory:_currentString];
+    } else if ([elementName isEqualToString:@"pubdate"]) {
+        _currentString = [[NSMutableString alloc] init];
     }
 }
 
@@ -57,6 +61,18 @@ didStartElement:(NSString *)elementName
  didEndElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName {
+    
+    // If the pubDate ends, use a date forammter to turn it into an NSDate
+    if([elementName isEqualToString:@"pubdate"]) {
+        static NSDateFormatter *dateFormatter = nil;
+        if(!dateFormatter) {
+            dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss z"];
+        }
+        NSLog(@"pubdate: %@", [dateFormatter dateFromString:_currentString]);
+        [self setPublicationDate:[dateFormatter dateFromString:_currentString]];
+    }
+    
     _currentString = nil;
     if([elementName isEqualToString:@"item"]
        ||[elementName isEqualToString:@"entry"]) {
@@ -79,6 +95,16 @@ didStartElement:(NSString *)elementName
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    // Make sure we are comparing an RSSItem!
+    if(![object isKindOfClass:[RSSItem class]]) {
+        return NO;
+    }
+    
+    // Now only return YES if the links are equal.
+    return [self.link isEqualToString:[object link]];
 }
 
 @end
