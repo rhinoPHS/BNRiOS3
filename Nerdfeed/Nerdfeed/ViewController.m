@@ -147,6 +147,9 @@
     [[cell textLabel] setText:[item title]];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", item.author, item.category];
+    
+//    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    
     return cell;
 }
 
